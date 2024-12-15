@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Certificate</title>
+    <!-- Link to Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0px 40px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input {
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            width: 100%;
+            color: #333;
+            background-color: #f7f7f7;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .btn-submit {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #6a11cb;
+        }
+
+        .verification-result {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .verification-result h2 {
+            color: #2575fc;
+        }
+
+        .verification-result p {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            input, .btn-submit {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+
+        /* Animation for form */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Verify Certificate</h1>
+
+        <form action="{{ url_for('verify_certificate') }}" method="post" class="form">
+            <div class="form-group">
+                <label for="certificate_id">Certificate ID:</label>
+                <input type="text" id="certificate_id" name="certificate_id" required placeholder="Enter Certificate ID">
+            </div>
+
+            <div class="form-group">
+                <label for="hash_value">Hash Value:</label>
+                <input type="text" id="hash_value" name="hash_value" required placeholder="Enter Hash Value">
+            </div>
+
+            <div class="form-group">
+                <label for="signature">Signature:</label>
+                <input type="text" id="signature" name="signature" required placeholder="Enter Signature">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Verify" class="btn-submit">
+            </div>
+        </form>
+
+        {% if verification_status %}
+            <div class="verification-result">
+                <h2>Verification Result:</h2>
+                <p>{{ verification_status }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

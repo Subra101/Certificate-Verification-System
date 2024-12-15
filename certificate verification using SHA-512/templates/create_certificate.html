@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Certificate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic reset and font style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Container styling */
+        .certificate-container {
+            background: #f4f7fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Label styling */
+        label {
+            font-weight: 500;
+            color: #333;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        /* Input styling */
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        /* Submit button styling */
+        input[type="submit"] {
+            background-color: #6a11cb;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 1.1em;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4b0e96;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <h1>Create Certificate</h1>
+        <form action="{{ url_for('create_certificate') }}" method="post">
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" required>
+
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course" required>
+
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required>
+
+            <label for="issue_date">Issue Date:</label>
+            <input type="date" id="issue_date" name="issue_date" required>
+
+            <input type="submit" value="Create Certificate">
+        </form>
+    </div>
+</body>
+</html>
